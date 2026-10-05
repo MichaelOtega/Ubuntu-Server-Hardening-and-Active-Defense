@@ -1,0 +1,17 @@
+# ==============================================================================
+# Configuration: jail.local
+# Purpose: Custom Fail2Ban overrides to integrate with UFW and Systemd.
+# ==============================================================================
+
+[DEFAULT]
+# Enforce bans strictly through UFW instead of standard iptables
+banaction = ufw
+bantime = 1h
+findtime = 10m
+maxretry = 5
+
+[sshd]
+enabled = true
+port = ssh
+# Modern Ubuntu logging fix: Read from systemd journal instead of auth.log
+backend = systemd
